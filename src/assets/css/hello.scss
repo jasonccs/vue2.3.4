@@ -1,0 +1,36 @@
+*{
+    font-family: Arial, 'Hiragino Sans GB', Microsoft Yahei, Helvetica Neue, Helvetica, sans-serif;
+}
+.slide{
+  float: left;
+
+}
+h1, h2 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  width: 90%;
+  height:auto;
+  margin: 0 auto;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+  float: left;
+  width: 100%;
+  height:30px;
+}
+
+a {
+  color: #42b983;
+}
+
+button{
+  width: 80px;
+  height:40px;
+
+}

@@ -1,12 +1,22 @@
 <template>
     <div class="hello">
         <h1>{{ msg }}</h1>
-         <First :message="parentMsg"></First>
-        <span v-text="parentMsg"></span><br>
+        <First v-bind:message="parentMsg" ></First>
+        <span>{{child}}</span>
         <button @click="getData" class="button" >Click Me!</button>
         <ul>
             <li v-for="(item, index) in items" >{{index}}{{item.title}}</li>
         </ul>
+        <div class="slide">
+            <ul>
+                <li>tab1</li>
+                <li>tab2</li>
+            </ul>
+            <ul>
+                <li>content1</li>
+                <li>content2</li>
+            </ul>
+        </div>
         <h3 v-show="ok">显示</h3>
         <router-link to="/slider">主页</router-link>
     </div>
@@ -16,6 +26,8 @@
 	import Vue from 'vue'
 	import Resource from 'vue-resource'
     import First from './First'
+
+	console.log(First)
 
 	Vue.use(Resource);
 
@@ -30,7 +42,8 @@
                 props:{
 					msg:'aaa'
                 },
-				parentMsg: 'a message from parent'  //在data中定义需要传入的值
+				parentMsg: 'a message from parent22',  //在data中定义需要传入的值
+			    child:''
 			}
 		},
 		components: {First},
@@ -50,34 +63,6 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-    h1, h2 {
-        font-weight: normal;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-        width: 90%;
-        height:auto;
-        margin: 0 auto;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-        float: left;
-        width: 100%;
-        height:30px;
-    }
-
-    a {
-        color: #42b983;
-    }
-
-    button{
-        width: 80px;
-        height:40px;
-
-    }
+<style lang="scss" scoped>
+    @import '../assets/css/hello.scss';
 </style>
