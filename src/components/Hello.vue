@@ -8,6 +8,7 @@
             <li v-for="(item, index) in items" >{{index}}{{item.title}}</li>
         </ul>
 
+
         <alert  placement="top" duration="3000" type="success" width="400px" dismissable>
             <span class="icon-ok-circled alert-icon-float-left"></span>
             <strong>Well Done!</strong>
