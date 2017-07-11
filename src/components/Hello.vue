@@ -1,20 +1,28 @@
 <template>
     <div class="hello">
-        <h1>{{ msg }}</h1>
+        <h1 >{{ msg }}</h1>
         <First v-bind:message="parentMsg" ></First>
+
+        <input type="text" ref="input1"/>
+        <button @click="add">添加</button>
+
         <span>{{child}}</span>
         <button @click="getData" class="button" >Click Me!</button>
         <ul>
             <li v-for="(item, index) in items" >{{index}}{{item.title}}</li>
         </ul>
 
-        <alert  v-bind:alertIsOpen="false" placement="top"   :duration="3000" type="success" width="400px" dismissable>
-            <span class="icon-ok-circled alert-icon-float-left"></span>
-            <strong>Well Done!</strong>
-            <p>You successfully read this important alert message.</p>
-        </alert>
+        <div :style="{ fontSize: size + 'px' }"></div>
+        <div :style="[styleObjectA, styleObjectB]"></div>
+        <div :class="[classA, classB]"></div>
+        <div :class="{ active: isActive }"></div>
 
+        <div class="static"
+             :class="{ active: isActive, 'text-danger': hasError }">
+        </div>
 
+        <div >{{ firstName }}</div>
+        <input v-model="firstName" value="">
         <p v-on:click="showAlert()"> 弹窗</p>
         <h3 v-show="ok" >显示</h3>
         <router-link to="/slider">主页</router-link>
@@ -24,32 +32,39 @@
 <script>
 	import Vue from 'vue';
 	import Resource from 'vue-resource';
-    import First from './First';
-	import { alert } from 'vue-strap';
+	import First from './First';
 
 	console.log(First)
 
 	Vue.use(Resource);
 
-	export default {
+     export default {
 		name: 'hello',
 		data () {
 			return {
 				numbers: [ 1, 2, 3, 4, 5 ],
 				msg: 'Welcome to Your Vue.js App',
 				items:[],
-                ok:false,
-                props:{
+				ok:false,
+				props:{
 					msg:'aaa'
-                },
+				},
 				parentMsg: 'a message from parent22',  //在data中定义需要传入的值
-			    child:'',
+				child:'',
 				alertIsOpen: false,
+				size:20,
+				styleObjectA:'20px',
+				styleObjectB:'30px',
+				classA:'a',
+				classB:'b',
+				isActive: true,
+				hasError: true,
+				firstName: 'Foo',
+                lastName:'word',
 			}
 		},
 		components: {
 			First,
-            alert
 		},
 		methods:{
 			getData:function () {
@@ -62,11 +77,17 @@
 					console.log(response);
 				})
 			},
-			showAlert : function(){
-				 this.$set(this.$data, 'alertIsOpen',true)// 改变数据并且更新视图
-			},
-
+			add:function(){
+				this.$refs.input1.value ="22"; //this.$refs.input1  减少获取dom节点的消耗
+			}
 		},
+        watch:{
+	        firstName: function (val) {
+//		        this.firstName = val + ' ' + this.lastName
+		        let aa= val + ' ' + this.firstName
+                console.log(aa);
+	        },
+        }
 	}
 </script>
 
