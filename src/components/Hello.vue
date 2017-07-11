@@ -8,24 +8,25 @@
             <li v-for="(item, index) in items" >{{index}}{{item.title}}</li>
         </ul>
 
-
-        <alert  placement="top" duration="3000" type="success" width="400px" dismissable>
+        <alert  v-bind:alertIsOpen="false" placement="top"   :duration="3000" type="success" width="400px" dismissable>
             <span class="icon-ok-circled alert-icon-float-left"></span>
             <strong>Well Done!</strong>
             <p>You successfully read this important alert message.</p>
         </alert>
 
-        <h3 v-show="ok">显示</h3>
+
+        <p v-on:click="showAlert()"> 弹窗</p>
+        <h3 v-show="ok" >显示</h3>
         <router-link to="/slider">主页</router-link>
     </div>
 </template>
 
 <script>
-	import Vue from 'vue'
-	import Resource from 'vue-resource'
-    import First from './First'
-	import { alert } from 'vue-strap'
-	import {coerce} from 'vue-strap/src/utils/utils.js'
+	import Vue from 'vue';
+	import Resource from 'vue-resource';
+    import First from './First';
+	import { alert } from 'vue-strap';
+
 	console.log(First)
 
 	Vue.use(Resource);
@@ -42,35 +43,14 @@
 					msg:'aaa'
                 },
 				parentMsg: 'a message from parent22',  //在data中定义需要传入的值
-			    child:''
+			    child:'',
+				alertIsOpen: false,
 			}
 		},
-        props:{
-	        type: {
-		        type: String
-	        },
-	        dismissable: {
-		        type: Boolean,
-		        coerce: coerce.boolean,
-		        default: false
-	        },
-	        show: {
-		        type: Boolean,
-		        default: true,
-		        twoWay: true
-	        },
-	        duration: {
-		        type: Number,
-		        default: 0
-	        },
-	        width: {
-		        type: String
-	        },
-	        placement: {
-		        type: String
-	        }
-        },
-		components: {First,alert},
+		components: {
+			First,
+            alert
+		},
 		methods:{
 			getData:function () {
 				var url="https://facebook.github.io/react-native/movies.json";
@@ -82,18 +62,11 @@
 					console.log(response);
 				})
 			},
-			showRight:function () {
+			showAlert : function(){
+				 this.$set(this.$data, 'alertIsOpen',true)// 改变数据并且更新视图
+			},
 
-			}
 		},
-        watch:{
-	        show (val) {
-		        if (this._timeout) clearTimeout(this._timeout)
-		        if (val && Boolean(this.duration)) {
-			        this._timeout = setTimeout(() => { this.show = false }, this.duration)
-		        }
-	        }
-        }
 	}
 </script>
 
