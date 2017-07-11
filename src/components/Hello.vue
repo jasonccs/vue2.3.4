@@ -7,16 +7,13 @@
         <ul>
             <li v-for="(item, index) in items" >{{index}}{{item.title}}</li>
         </ul>
-        <div class="slide">
-            <ul>
-                <li>tab1</li>
-                <li>tab2</li>
-            </ul>
-            <ul>
-                <li>content1</li>
-                <li>content2</li>
-            </ul>
-        </div>
+
+        <alert  placement="top" duration="3000" type="success" width="400px" dismissable>
+            <span class="icon-ok-circled alert-icon-float-left"></span>
+            <strong>Well Done!</strong>
+            <p>You successfully read this important alert message.</p>
+        </alert>
+
         <h3 v-show="ok">显示</h3>
         <router-link to="/slider">主页</router-link>
     </div>
@@ -26,7 +23,8 @@
 	import Vue from 'vue'
 	import Resource from 'vue-resource'
     import First from './First'
-
+	import { alert } from 'vue-strap'
+	import {coerce} from 'vue-strap/src/utils/utils.js'
 	console.log(First)
 
 	Vue.use(Resource);
@@ -46,7 +44,32 @@
 			    child:''
 			}
 		},
-		components: {First},
+        props:{
+	        type: {
+		        type: String
+	        },
+	        dismissable: {
+		        type: Boolean,
+		        coerce: coerce.boolean,
+		        default: false
+	        },
+	        show: {
+		        type: Boolean,
+		        default: true,
+		        twoWay: true
+	        },
+	        duration: {
+		        type: Number,
+		        default: 0
+	        },
+	        width: {
+		        type: String
+	        },
+	        placement: {
+		        type: String
+	        }
+        },
+		components: {First,alert},
 		methods:{
 			getData:function () {
 				var url="https://facebook.github.io/react-native/movies.json";
@@ -57,6 +80,9 @@
 				},function(response){
 					console.log(response);
 				})
+			},
+			showRight:function () {
+
 			}
 		}
 	}
