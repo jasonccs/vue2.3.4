@@ -4,11 +4,9 @@
         <br/>
         <button @click="emita" >Click Me!!!</button>
         <router-link to="/slider">First主页</router-link>
-
-        <h1 slot="footer">
-            About Me
-        </h1>
-
+        <div :class="alertClasses">
+            <slot><strong>Default!</strong> Hello World~</slot>
+        </div>
     </div>
 </template>
 <script>
@@ -23,7 +21,18 @@
                 type:Number,
                 default:666,
 //				required: true,
+            },
+            type:{
+				type:String,
             }
+		},
+		computed:{
+			alertClasses:function () {
+				return {
+					'Alert--Success':this.type==='success',
+					'Alert--Waring':this.type==='waring'
+				}
+			}
 		},
         methods:{
 	        emita:function () {
@@ -34,3 +43,12 @@
 
 	}
 </script>
+<style scope>
+
+    .Alert--Waring{
+        color: red;
+    }
+    .Alert--Success{
+        color: green;
+    }
+</style>

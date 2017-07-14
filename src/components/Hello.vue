@@ -1,8 +1,7 @@
 <template>
     <div class="hello">
         <h1 >{{ msg }}</h1>
-        <First v-bind:message="parentMsg" v-on:emitData="test" ></First>
-        <First v-bind:message="parentMsg" ></First>
+        <First v-bind:message="parentMsg" v-on:emitData="test" type="waring"></First>
 
         <input type="text" ref="input1"/>
         <button @click="add">添加</button>
@@ -67,13 +66,12 @@
 				hasError: true,
 				firstName: 'Foo',
 				lastName:'word',
-				first:''
+				first:'',
 			}
 		},
 		mounted () {
 			//el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm.$el 也在文档内。
 			//接收First组件的数据
-			console.log(9999999)
 			console.log(this);
 			this.$on("emitData", function (hi) {
 				this.first = hi;
@@ -118,4 +116,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
     @import '../assets/css/hello.scss';
+
+
 </style>
