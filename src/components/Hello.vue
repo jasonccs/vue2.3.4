@@ -1,10 +1,16 @@
 <template>
     <div class="hello">
         <h1 >{{ msg }}</h1>
+        <First v-bind:message="parentMsg" v-on:emitData="test" ></First>
         <First v-bind:message="parentMsg" ></First>
 
         <input type="text" ref="input1"/>
         <button @click="add">添加</button>
+        <input type="text" ref="input2"/>
+
+        <!--<button @click="emitData">得到子组件数据</button>-->
+
+        <p>{{first}}</p>
 
         <span>{{child}}</span>
         <button @click="getData" class="button" >Click Me!</button>
@@ -38,7 +44,7 @@
 
 	Vue.use(Resource);
 
-     export default {
+	export default {
 		name: 'hello',
 		data () {
 			return {
@@ -49,7 +55,7 @@
 				props:{
 					msg:'aaa'
 				},
-				parentMsg: 'a message from parent22',  //在data中定义需要传入的值
+				parentMsg: 8,  //在data中定义需要传入的值
 				child:'',
 				alertIsOpen: false,
 				size:20,
@@ -60,12 +66,20 @@
 				isActive: true,
 				hasError: true,
 				firstName: 'Foo',
-                lastName:'word',
+				lastName:'word',
+				first:''
 			}
 		},
-		components: {
-			First,
+		mounted () {
+			//el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm.$el 也在文档内。
+			//接收First组件的数据
+			console.log(9999999)
+			console.log(this);
+			this.$on("emitData", function (hi) {
+				this.first = hi;
+			});
 		},
+		components: {First,},
 		methods:{
 			getData:function () {
 				var url="https://facebook.github.io/react-native/movies.json";
@@ -79,15 +93,25 @@
 			},
 			add:function(){
 				this.$refs.input1.value ="22"; //this.$refs.input1  减少获取dom节点的消耗
-			}
+			},
+			test:function (value) {
+				this.first=value;
+			},
+//			emitData:function () {
+//                this.$on('test',function (value) {
+//	                this.first=value;
+//	                console.log(111);
+//                });
+//				console.log(888);
+//			}
 		},
-        watch:{
-	        firstName: function (val) {
+		watch:{
+			firstName: function (val) {
 //		        this.firstName = val + ' ' + this.lastName
-		        let aa= val + ' ' + this.firstName
-                console.log(aa);
-	        },
-        }
+				let aa= val + ' ' + this.firstName
+				console.log(aa);
+			},
+		}
 	}
 </script>
 

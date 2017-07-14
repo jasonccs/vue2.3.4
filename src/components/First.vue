@@ -1,8 +1,14 @@
 <template>
     <div>
-        <a  v-bind:href="message" ref="child">{{msg}}(子组件)</a>
+        <a>{{message}}(子组件)</a>
         <br/>
-        <router-link to="/slider">主页</router-link>
+        <button @click="emita" >Click Me!!!</button>
+        <router-link to="/slider">First主页</router-link>
+
+        <h1 slot="footer">
+            About Me
+        </h1>
+
     </div>
 </template>
 <script>
@@ -10,13 +16,20 @@
 		data(){
         	return {
 		        msg:'message',
-
             }
         },
 		props: {
-			    message: String  //定义传值的类型<br>    }
+			message:  {
+                type:Number,
+                default:666,
+//				required: true,
+            }
 		},
-
+        methods:{
+	        emita:function () {
+                this.$emit('emitData','hi');
+           }
+        }
 
 
 	}
