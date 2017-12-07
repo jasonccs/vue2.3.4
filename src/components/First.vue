@@ -4,6 +4,7 @@
         <br/>
         <button @click="emita" >Click Me!!!</button>
         <router-link to="/slider">First主页</router-link>
+        <router-link to="/tree">tree</router-link>
         <div :class="alertClasses">
             <slot><strong>Default!</strong> Hello World~</slot>
         </div>
@@ -30,7 +31,8 @@
 			alertClasses:function () {
 				return {
 					'Alert--Success':this.type==='success',
-					'Alert--Waring':this.type==='waring'
+					'Alert--Waring':this.type==='waring',
+					'none':this.type==='none'
 				}
 			}
 		},
@@ -50,5 +52,8 @@
     }
     .Alert--Success{
         color: green;
+    }
+    .none{
+        display: none;
     }
 </style>

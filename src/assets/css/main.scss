@@ -1,0 +1,106 @@
+html { font-size: 100%; text-size-adjust: 100%; -webkit-text-size-adjust: 100%; -moz-text-size-adjust: 100%; -o-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+body, h1, h2, h3, h4, h5, h6, hr, p, dl, dt, dd, ul, ol, li, form, button, input, textarea, th, td { margin: 0; padding: 0; word-wrap: break-word; }
+body, html { height: 100%; }
+body, html, input { font: 12px/1.5 "Microsoft YaHei","寰蒋闆呴粦","瀹嬩綋","榛戜綋"; }
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: none;border:0; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+input, label, img, th, textarea { vertical-align: middle; outline: none; -webkit-appearance: none; }
+input.button, input.btn { padding: 0.25em; overflow: visible !ie; }
+ul, ol, li { list-style: none; }
+em {font-style:normal}
+p {word-wrap:break-word}
+a { text-decoration: none; blr: expression(this.onFocus=this.blur()); outline: none;  color: #000 }
+a:hover { text-decoration: none; _zoom: 1; color:#B73102;}
+a:focus { -moz-outline-style: none; outline: none; }
+a:active { -moz-outline-style: none; outline: none; }
+/**, :after, :before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}*/
+input.button, input { padding: 0.25em;  overflow: visible;border: 1px solid #000000 }
+.chat{
+    margin: 0 auto;
+    width: 600px;
+    height:400px;
+    border: 1px solid #2a6496;
+    margin: 100px 0px;
+    float: left;
+}
+.content{
+    height:307px;
+    width: 580px;
+}
+.content ul li h3{
+    height:30px;
+    line-height: 30px;
+    width: 300px;
+    float: left;
+}
+.content ul li span{
+    min-height:30px;
+    line-height: 30px;
+    width: 137px;
+    float: right;
+}
+
+.input{
+    width: 480px;
+    height:60px;
+    margin-right: 10px;
+    float: left;
+    border: 1px solid #2a6496;
+}
+.button{
+    width: 100px;
+    height:60px;
+    float: left;
+}
+.friends{
+    width: 200px;
+    height: auto;
+    float: left;
+    margin: 100px 200px;
+    float: left;
+
+}
+.icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../images/icons.png);
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+.icon-file2 {
+    background-position: -108px -118px;
+    width: 37px;
+    height: 50px;
+    margin-right: 5px;
+}
+.icon-file {
+    background-position: -35px -78px;
+    width: 25px;
+    height: 25px;
+}
+.chat-btn{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin-right: 2px;
+}
+.hide{display:none !important;}
+.u-netcall-audio-link {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: url(../images/icons.png) no-repeat;
+    background-position: -126px -218px;
+}
+.audio{
+    width: 200px;
+    height: 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #006600;
+}

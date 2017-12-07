@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        <h1 >{{ msg }}</h1>
+        <h1 >{{ msg }}444</h1>
         <First v-bind:message="parentMsg" v-on:emitData="test" type="waring"></First>
 
         <input type="text" ref="input1"/>
@@ -31,6 +31,8 @@
         <p v-on:click="showAlert()"> 弹窗</p>
         <h3 v-show="ok" >显示</h3>
         <router-link to="/slider">主页</router-link>
+
+        <router-link to="/chat">聊天</router-link>
     </div>
 </template>
 
@@ -39,9 +41,9 @@
 	import Resource from 'vue-resource';
 	import First from './First';
 
-	console.log(First)
+//	console.log(First)
 
-	Vue.use(Resource);
+//	Vue.use(Resource);
 
 	export default {
 		name: 'hello',
