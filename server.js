@@ -35,9 +35,10 @@ io.sockets.on('connection',function(socket){
     //io.sockets.emit("msg",{data:"hello,all"});
 
    // io.sockets.socket(socketid).emit(‘String’, data);//给指定的客户端发送消息
-    io.sockets.sockets('1m2Ew8uWxbGdGbK8AAAO').emit('c_hi', { hello: 'world' });//给指定的客户端发送消息
-
-
+   // io.sockets.socket('1m2Ew8uWxbGdGbK8AAAO').emit('c_hi', { hello: 'world' });//给指定的客户端发送消息
+    if (io.sockets.connected['1m2Ew8uWxbGdGbK8AAAO']) {
+      io.sockets.connected['1m2Ew8uWxbGdGbK8AAAO'].emit('message','surprise');
+    }
     // io.sockets.emit('c_hi',{ hello: 'world' }) //时间广播
 
   });
