@@ -34,6 +34,8 @@ io.sockets.on('connection',function(socket){
     //给所有客户端广播消息
     //io.sockets.emit("msg",{data:"hello,all"});
 
+   // io.sockets.socket(socketid).emit(‘String’, data);//给指定的客户端发送消息
+
     io.sockets.emit('c_hi',{ hello: 'world' }) //时间广播
 
   });

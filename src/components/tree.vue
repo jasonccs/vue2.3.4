@@ -119,7 +119,7 @@
     },
     sockets:{
       connect: function(){  //这里是监听connect事件
-        console.log('链接上了')
+        console.log('链接上了');
         this.id=this.$socket.id
       },
       c_hi: function(val){
