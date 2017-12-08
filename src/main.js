@@ -10,6 +10,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+
+import VueSocketio from 'vue-socket.io';
+
+Vue.use(VueSocketio, 'http://127.0.0.1:3001');
+
 Vue.use(ElementUI)
 
 Vue.prototype.$ajax = axios

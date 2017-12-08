@@ -8,32 +8,41 @@
     <!--</el-checkbox-group>-->
 
 
-
+    <button @click="send">发送消息</button>
 
 
     <div class="panel-body panel-body-nopadding">
 
-              <template  v-for="(value, key, index) in cities"  >
+              <template  v-for="(value, key) in cities"  >
 
                   <div class="top-permission col-md-12" >
-                    <a href="javascript:;" class="display-sub-permission-toggle"><span class="glyphicon glyphicon-minus"></span></a>
-                    <input type="checkbox" name="permissions[]" :value="value" class="top-permission-checkbox fa fa-bars" :checked="$options.filters.findElem(checkedCities,'permission_id',value.id)">
-                    <label><h5>{{value.display_name}}
-</h5></label>
+
+                  <!---->
+                    <!--<a href="javascript:;" class="display-sub-permission-toggle"><span class="glyphicon glyphicon-minus"></span></a>-->
+                    <!--<input type="checkbox" name="permissions[]" :value="value" class="top-permission-checkbox fa fa-bars" :checked="$options.filters.findElem(checkedCities,'permission_id',value.id)">-->
+                    <!--<label><h5>{{value.display_name}}</h5></label>-->
+
+                    <label role="checkbox" class="el-checkbox">
+                              <span aria-checked="mixed" v-bind:class="['el-checkbox__input',{'is-checked':$options.filters.findElem(checkedCities,'permission_id',value.id)}]">
+                              <span class="el-checkbox__inner"></span>
+                              <input type="checkbox" class="el-checkbox__original" name="permissions[]" :value="value.id" ></span>
+                      <span class="el-checkbox__label">{{value.display_name}}{{key}}</span>
+                    </label>
+
                   </div>
 
                   <div class="sub-permissions col-md-11 col-md-offset-1">
-                      <template v-for="(value2, key2, index2) in value.sub_permission" >
+                      <template v-for="(value2, key2) in value.sub_permission" >
                         <div class="col-sm-3">
                           <!--   <label v-bind:class="[{sqs_checkbox:$options.filters.findElem(checkedCities,'permission_id',value2.id)}]"><input type="checkbox" name="permissions[]" :value="value2.id" :checked="$options.filters.findElem(checkedCities,'permission_id',value2.id)">
                                   {{value2.display_name}}
                             </label>
  -->
-                            <label role="checkbox" class="el-checkbox">
-                              <span aria-checked="mixed" v-bind:class="['el-checkbox__input',{'is-checked':$options.filters.findElem(checkedCities,'permission_id',value2.id)}]">
+                            <label role="checkbox" class="el-checkbox" @change="checkedChange($event,key2)">
+                              <span aria-checked="mixed" :class="['el-checkbox__input',{'is-checked':$options.filters.findElem(checkedCities,'permission_id',value2.id) || key2==index ?!checked:checked}]">
                               <span class="el-checkbox__inner"></span>
-                              <input type="checkbox" class="el-checkbox__original" name="permissions[]" :value="value2.id" ></span>
-                              <span class="el-checkbox__label">{{value2.display_name}}</span>
+                              <input type="checkbox" class="el-checkbox__original" name="permissions[]" :value="value2.id"  ref="children"  :checked="$options.filters.findElem(checkedCities,'permission_id',value2.id)"></span>
+                              <span class="el-checkbox__label">{{value2.display_name}}{{key2}}</span>
                             </label>
 
                         </div>
@@ -49,6 +58,7 @@
 <script>
 
   import axios from 'axios';
+//  import io from 'socket.io';
 
   export default {
     data(){
@@ -58,7 +68,10 @@
         checkedCities:[],
         cities: [],
         isIndeterminate: true,
-         isActive: true,
+        isActive: true,
+        checked:false,
+        index:null,
+        id:null
       }
     },
     props: {
@@ -104,8 +117,24 @@
 
 
     },
+    sockets:{
+      connect: function(){  //这里是监听connect事件
+        console.log('链接上了')
+        this.id=this.$socket.id
+      },
+      c_hi: function(val){
+        console.log(val)
+      }
+    },
+    mounted(){
+      this.id=this.$socket.id
+    },
     created(){
       this.getList();
+//      var socket = io.connect('http://127.0.0.1:3000');
+//      io.sockets.on('connection',function(socket){
+//        socket.emit('message',{text:'你上线了'});
+//      });
     },
     methods:{
 
@@ -134,6 +163,20 @@
 
         });
 
+      },
+      checkedChange(e,index){//切换是否勾选
+
+//        this.checked=!this.checked;
+
+        this.index=index;
+        this.checked=!this.checked;
+//        console.log(e.target);
+        console.log(this.checked,index,this.index);
+
+      },
+
+      send(){
+        this.$socket.emit('hi', 'hello-hello');
       },
       handleCheckAllChange() {
         this.checkedCities = this.checkAll ? cityOptions : [];
